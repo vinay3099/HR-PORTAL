@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState,createContext} from 'react'
+import { BrowserRouter as  Router, Routes,Route } from "react-router-dom";
+import Signup from "./Components/Signup";
+import Login from './Components/Login';
+import MyDashboard from "./Components/Mydashboard";
+import AddEmployee from './Components/AddEmployee';
+import EmployeeDashboard from './Components/Employeedashboard';
+
+export const store = createContext();
 
 function App() {
+
+  const[token,setToken]= useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <store.Provider value={[token,setToken]}>
+
+      <Router>
+          <Routes>
+               <Route path="/" element={<Signup/>}/>
+               <Route path="/login" element={<Login/>}/>
+               <Route path="/Mydashboard" element={<MyDashboard/>}/>
+               <Route path="/Addemployee" element={<AddEmployee/>}/>
+               <Route path="/employee" element={<EmployeeDashboard/>}/>
+          </Routes>
+      </Router>
+    
+    
+    </store.Provider>
+    
+
   );
 }
 
